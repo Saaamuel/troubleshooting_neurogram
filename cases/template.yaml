@@ -1,0 +1,60 @@
+# TEMPLATE DE NOVO CASO DE TROUBLESHOOTING
+# Copie este arquivo e renomeie para NG-TROUBLE-XXX.yaml
+
+id: NG-TROUBLE-XXX
+
+title: "Título curto e específico do problema"
+
+problem_summary: >
+  Descreva o problema do ponto de vista do usuário.
+  O que ele vê? Em que contexto ocorre?
+  Use linguagem natural, não técnica.
+
+user_symptoms:
+  - "Frase real que o usuário diria"
+  - "Erro percebido na interface"
+  - "Descrição comum em tickets ou WhatsApp"
+
+origin:
+  - configuracao
+  # consulte taxonomy/origin.yaml
+
+layer:
+  - visualizacao
+  # onde o usuário sente o problema
+  # consulte taxonomy/layer.yaml
+
+severity:
+  user_impact: media
+  system_impact: baixa
+
+owner_team:
+  - suporte
+
+# ----------------------------
+# CAMPOS OPCIONAIS (RECOMENDADOS)
+# ----------------------------
+
+root_causes:
+  - description: "Causa raiz provável"
+    confidence: media
+
+business_rule:
+  - "Regra fixa do sistema relacionada a este problema"
+  - description: "Regra com contexto adicional"
+    scope: ingestao | processamento | visualizacao
+
+resolution_steps:
+  - "Passo 1 para resolver"
+  - "Passo 2 para resolver"
+
+triage_questions:
+  - "Pergunta que ajuda a entender o contexto"
+
+evidence_to_collect:
+  - "Logs"
+  - "Arquivo EDF"
+  - "Print da tela"
+
+do_not_do:
+  - "Ações que NÃO devem ser feitas"
