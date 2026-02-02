@@ -1,0 +1,12 @@
+values:
+  - ingestao
+  - processamento
+  - visualizacao
+  - laudo
+  - montagem
+  - storage
+  - identidade
+  - configuracao
+  - cliente_desktop
+  - case_id
+  - autenticacao

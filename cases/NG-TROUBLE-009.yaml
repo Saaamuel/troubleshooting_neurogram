@@ -1,0 +1,36 @@
+id: NG-TROUBLE-009
+title: "Exame Nihon com tempo incorreto"
+
+problem_summary: >
+  Exame da manufatura Nihon apresenta duração incorreta ou dados incompletos
+  após o processamento. O problema ocorre quando nem todos os arquivos necessários
+  estão disponíveis no momento do reprocessamento.
+
+user_symptoms:
+  - "Exame Nihon está com duração errada"
+  - "Tempo do exame está incorreto"
+  - "Exame ficou menor do que deveria"
+  - "Dados parecem incompletos após reprocessar"
+
+
+
+origin:
+  - dado_incompleto
+
+layer:
+  - ingestao
+  - processamento
+
+severity:
+  user_impact: alta
+
+root_causes:
+  - description: "Arquivo EEG incompleto no bucket"
+    confidence: alta
+
+resolution_steps:
+  - "Reprocessar arquivos completos"
+  - "Validar tempo antes do upload final"
+
+owner_team:
+  - suporte_tecnico

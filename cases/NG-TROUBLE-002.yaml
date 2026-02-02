@@ -1,0 +1,90 @@
+id: NG-TROUBLE-002
+title: "Código TUSS não aparece no laudo"
+
+problem_summary: >
+  Usuário gera o pré-laudo ou laudo final, porém o código TUSS não é exibido no PDF.
+  O problema ocorre quando dados do exame ou configurações do modelo de laudo
+  não foram definidos antes da geração do pré-laudo.
+
+
+user_symptoms:
+  - "O código TUSS não aparece no laudo"
+  - "Laudo saiu sem TUSS"
+  - "PDF não mostra o código do procedimento"
+
+affected_components:
+  - Laudo
+  - Modelo de laudo
+  - Fluxo exame → pré-laudo → laudo
+
+origin:
+  - processo
+  - acao_do_usuario
+
+layer:
+  - configuracao
+  - laudo
+
+severity:
+  user_impact: media
+  system_impact: baixa
+
+recurrence: media
+
+detection:
+  - percebido_pelo_usuario
+
+root_causes:
+  - description: "Dados do exame não foram preenchidos antes da geração do pré-laudo"
+    confidence: alta
+  - description: "Campo TUSS não está habilitado no modelo de laudo"
+    confidence: alta
+
+dependency_chain:
+  - "Preenchimento completo dos dados do exame"
+  - "Salvamento dos dados"
+  - "Configuração correta do modelo de laudo"
+  - "Geração do pré-laudo"
+
+triage_questions:
+  - "Você preencheu e salvou todos os dados do exame antes de gerar o pré-laudo?"
+  - "O campo TUSS está habilitado no modelo do laudo?"
+  - "Você está usando um modelo de laudo atualizado?"
+
+diagnostic_steps:
+  - "Editar o exame e verificar se o campo TUSS está preenchido"
+  - "Confirmar que os dados foram salvos com sucesso"
+  - "Abrir a configuração do modelo de laudo"
+  - "Verificar se o campo TUSS está selecionado"
+
+resolution_steps:
+  - "Preencher corretamente os dados do exame"
+  - "Salvar os dados antes de gerar o pré-laudo"
+  - "Ativar o campo TUSS no modelo de laudo"
+  - "Gerar novamente o pré-laudo"
+
+workarounds:
+  - "Atualizar o laudo após correção dos dados"
+  - "Regerar o PDF antes da assinatura"
+
+do_not_do:
+  - "Não tentar editar o PDF manualmente"
+  - "Não gerar o laudo final sem validar o pré-laudo"
+
+evidence_to_collect:
+  - "Print da tela de edição do exame"
+  - "Print da configuração do modelo de laudo"
+  - "ID do exame"
+
+escalation_criteria:
+  - "Campo TUSS está corretamente configurado e ainda não aparece"
+  - "Modelo de laudo não permite edição"
+  - "Comportamento inconsistente entre exames"
+
+owner_team:
+  - suporte
+  - produto
+
+sla_recommendation: "Resposta em até 1 dia útil"
+
+confidence_level: alta

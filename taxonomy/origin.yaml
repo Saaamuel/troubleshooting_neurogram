@@ -1,0 +1,15 @@
+values:
+  - processo
+  - acao_do_usuario
+  - configuracao
+  - autenticacao
+  - regra_de_negocio
+  - variacao_manufatura
+  - integridade_de_arquivo
+  - dado_incompleto
+  - falha_de_trigger
+  - processamento
+  - operacao_interna
+  - performance
+  - infra
+  - configuracao_usuario

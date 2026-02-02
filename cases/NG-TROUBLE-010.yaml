@@ -1,0 +1,29 @@
+id: NG-TROUBLE-010
+title: "Calibrar tela do visualizador"
+
+problem_summary: >
+  Usuário precisa calibrar a escala do visualizador para garantir medições corretas
+  em milímetros e centímetros. O ajuste é feito manualmente com régua física na tela.
+
+user_symptoms:
+  - "Preciso calibrar o visualizador"
+  - "Escala do visualizador está errada"
+  - "Medições em mm/cm não batem na tela"
+  - "Como ajustar a calibração do visualizador?"
+
+
+
+origin:
+  - configuracao_usuario
+
+layer:
+  - visualizacao
+
+severity:
+  user_impact: baixa
+
+business_rule:
+  - "Calibração deve ser feita com régua física"
+
+owner_team:
+  - suporte

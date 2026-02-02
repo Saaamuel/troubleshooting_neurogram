@@ -1,0 +1,58 @@
+id: NG-TROUBLE-003
+title: "Exame não abre no visualizador (Neurovirtual)"
+
+problem_summary: >
+  Exame aparece listado na plataforma, mas o visualizador não abre ou entra em loop
+  durante o carregamento. O problema ocorre em exames da manufatura Neurovirtual
+  quando há inconsistência ou ausência de eventos no arquivo evXML.
+
+
+user_symptoms:
+  - "O exame não abre"
+  - "Visualizador fica carregando e volta"
+  - "Erro no visualizador"
+
+affected_components:
+  - Visualizador
+  - Pipeline edf-files
+  - Manufatura Neurovirtual
+
+origin:
+  - dado_incompleto
+  - regra_de_negocio
+
+layer:
+  - processamento
+  - visualizacao
+
+severity:
+  user_impact: alta
+  system_impact: media
+
+root_causes:
+  - description: "Arquivo .evXML não contém evento de início de gravação"
+    confidence: alta
+
+triage_questions:
+  - "A manufatura do exame é Neurovirtual?"
+  - "O exame aparece mas não abre no visualizador?"
+  - "O carregamento chega perto de 80% e reinicia?"
+
+diagnostic_steps:
+  - "Verificar erro no console do navegador"
+  - "Confirmar ausência do edf-visualizer no bucket"
+  - "Validar conteúdo do arquivo .evXML"
+
+resolution_steps:
+  - "Corrigir o arquivo .evXML com evento de início de gravação"
+  - "Reenviar arquivos brutos para o bucket"
+
+do_not_do:
+  - "Não tentar reprocessar sem corrigir o evXML"
+
+escalation_criteria:
+  - "Arquivo evXML contém evento correto e ainda não processa"
+
+owner_team:
+  - suporte_tecnico
+  - dados

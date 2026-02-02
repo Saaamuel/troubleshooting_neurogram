@@ -1,0 +1,86 @@
+id: NG-TROUBLE-001
+title: "Exames não sobem na plataforma (data do arquivo a 30 dias)"
+
+problem_summary: >
+  Usuário tenta sincronizar exames pelo Neurosync, mas os arquivos não aparecem
+  na plataforma. O problema ocorre quando os arquivos possuem data de modificação
+  superior ao limite aceito para sincronização automática.
+
+
+user_symptoms:
+  - "Os exames não sobem"
+  - "Cliquei em sincronizar mas nada acontece"
+  - "Neurosync não envia os arquivos"
+  - "Exames não aparecem na plataforma"
+
+affected_components:
+  - Neurosync
+  - Pipeline de ingestão
+  - Cliente desktop (Windows)
+
+origin:
+  - regra_de_negocio
+  - acao_do_usuario
+
+layer:
+  - ingestao
+  - cliente_desktop
+
+severity:
+  user_impact: alta
+  system_impact: baixa
+
+recurrence: alta
+
+detection:
+  - percebido_pelo_usuario
+
+root_causes:
+  - description: "Arquivos possuem data de modificação superior a 30 dias"
+    confidence: alta
+  - description: "Usuário está tentando subir backlog histórico"
+    confidence: media
+
+business_rule:
+  - description: "Neurosync sincroniza apenas arquivos com data de modificação inferior a 30 dias"
+    scope: ingestao
+
+triage_questions:
+  - "Qual a data de modificação dos arquivos que você está tentando sincronizar?"
+  - "Esses exames são antigos ou fazem parte de um backlog?"
+  - "Os arquivos foram copiados recentemente de outra máquina?"
+
+diagnostic_steps:
+  - "Abrir a pasta de exames no Windows Explorer"
+  - "Exibir a coluna 'Data de modificação'"
+  - "Verificar se os arquivos têm data superior a 30 dias"
+
+resolution_steps:
+  - "Confirmar que os arquivos não se qualificam para sincronização automática"
+  - "Orientar sobre necessidade de intervenção manual ou alternativa de importação"
+
+workarounds:
+  - "Avaliar possibilidade de importação assistida"
+  - "Solicitar suporte para casos de migração histórica"
+
+do_not_do:
+  - "Não alterar manualmente a data dos arquivos sem orientação do suporte"
+  - "Não repetir tentativas de sincronização sem verificar a data"
+
+evidence_to_collect:
+  - "Print da pasta com data de modificação visível"
+  - "Versão do Neurosync instalada"
+  - "Tipo de equipamento selecionado"
+
+escalation_criteria:
+  - "Arquivos possuem menos de 30 dias e ainda assim não sincronizam"
+  - "Erro explícito apresentado no Neurosync"
+  - "Cliente em processo de migração de base histórica"
+
+owner_team:
+  - suporte
+  - produto
+
+sla_recommendation: "Resposta em até 1 dia útil"
+
+confidence_level: alta

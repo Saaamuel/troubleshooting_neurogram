@@ -1,0 +1,29 @@
+id: NG-TROUBLE-008
+title: "Acessar arquivos de exame no bucket GCP"
+
+problem_summary: >
+  Usuário interno precisa acessar os arquivos brutos de exames armazenados
+  em bucket GCP, normalmente para suporte técnico, análise ou reprocessamento.
+
+user_symptoms:
+  - "Preciso acessar arquivos no bucket GCP"
+  - "Quero baixar os arquivos brutos do exame"
+  - "Preciso verificar se o arquivo está no GCS"
+  - "Onde encontro o arquivo do exame no bucket?"
+
+
+
+origin:
+  - operacao_interna
+
+layer:
+  - storage
+
+severity:
+  user_impact: baixa
+
+business_rule:
+  - "Necessário coletar companyId via Keycloak"
+
+owner_team:
+  - infra

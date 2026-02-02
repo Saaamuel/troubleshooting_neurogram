@@ -1,0 +1,29 @@
+id: NG-TROUBLE-007
+title: "Acessar arquivos de exame no bucket AWS"
+
+problem_summary: >
+  Usuário interno precisa acessar os arquivos brutos de exames armazenados
+  em bucket AWS para fins de verificação, suporte ou auditoria.
+
+user_symptoms:
+  - "Preciso acessar arquivos no bucket AWS"
+  - "Quero baixar os arquivos brutos do exame"
+  - "Preciso verificar se o arquivo está no S3"
+  - "Onde encontro o arquivo do exame no bucket?"
+
+
+
+origin:
+  - operacao_interna
+
+layer:
+  - storage
+
+severity:
+  user_impact: baixa
+
+business_rule:
+  - "Acesso somente com permissão ReadOnly"
+
+owner_team:
+  - infra

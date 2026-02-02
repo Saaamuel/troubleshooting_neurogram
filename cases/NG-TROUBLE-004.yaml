@@ -1,0 +1,42 @@
+id: NG-TROUBLE-004
+title: "Alteração de senha via plataforma"
+
+problem_summary: >
+  Usuário consegue acessar a plataforma, mas precisa alterar a senha de login.
+  O cenário é comum após ajustes cadastrais, como correção de CPF ou primeiro acesso.
+
+user_symptoms:
+  - "Quero alterar minha senha"
+  - "Preciso trocar a senha de acesso"
+  - "Minha senha atual não serve mais"
+  - "CPF foi corrigido e preciso atualizar a senha"
+
+
+
+origin:
+  - processo
+  
+
+layer:
+  - autenticacao
+
+severity:
+  user_impact: media
+
+root_causes:
+  - description: "Senha inicial é o CPF do primeiro cadastro"
+    confidence: alta
+
+triage_questions:
+  - "Você conseguiu acessar a plataforma?"
+  - "O CPF cadastrado foi alterado?"
+
+resolution_steps:
+  - "Alterar senha pelo perfil do usuário"
+  - "Utilizar CPF atualizado como nova senha"
+
+escalation_criteria:
+  - "Usuário não consegue acessar a conta"
+
+owner_team:
+  - suporte

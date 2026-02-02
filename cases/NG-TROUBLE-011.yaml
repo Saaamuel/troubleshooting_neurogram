@@ -1,0 +1,32 @@
+id: NG-TROUBLE-011
+title: "Reset de senha via Keycloak"
+
+problem_summary: >
+  Usuário não consegue acessar a plataforma e não consegue redefinir a senha
+  utilizando a opção automática de recuperação. O reset precisa ser realizado
+  manualmente via Keycloak pelo time de suporte.
+
+
+user_symptoms:
+  - "Não consigo acessar a plataforma"
+  - "Esqueci minha senha não funciona"
+  - "Preciso redefinir minha senha"
+  - "Senha incorreta e não consigo recuperar"
+
+
+origin:
+  - autenticacao
+
+layer:
+  - identidade
+
+severity:
+  user_impact: alta
+  system_impact: baixa
+
+business_rule:
+  - "Reset de senha não é automatizado"
+  - "Reset deve ser realizado manualmente via Keycloak"
+
+owner_team:
+  - suporte

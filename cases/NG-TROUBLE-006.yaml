@@ -1,0 +1,44 @@
+id: NG-TROUBLE-006
+title: "Exames no bucket não aparecem na plataforma"
+
+problem_summary: >
+  Arquivos de exame estão presentes no bucket de armazenamento, mas não foram
+  indexados ou exibidos na plataforma. O problema ocorre quando o processamento
+  automático não é acionado corretamente.
+
+user_symptoms:
+  - "Os arquivos estão no bucket mas não aparecem na plataforma"
+  - "Exame não foi criado na plataforma"
+  - "Subi os arquivos no bucket e não processou"
+  - "Bucket tem os dados, mas não vejo o exame"
+
+
+
+origin:
+  - falha_de_trigger
+  - processamento
+
+layer:
+  - ingestao
+
+severity:
+  user_impact: alta
+
+root_causes:
+  - description: "Trigger de processamento não executou"
+    confidence: alta
+
+triage_questions:
+  - "Os arquivos constam no bucket?"
+  - "A manufatura é Neurotec?"
+
+resolution_steps:
+  - "Coletar arquivos originais"
+  - "Reprocessar manualmente"
+
+escalation_criteria:
+  - "Reprocessamento não gera exame"
+
+owner_team:
+  - suporte
+  - engenharia

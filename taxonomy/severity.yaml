@@ -1,0 +1,9 @@
+user_impact:
+  - baixa
+  - media
+  - alta
+
+system_impact:
+  - baixa
+  - media
+  - alta

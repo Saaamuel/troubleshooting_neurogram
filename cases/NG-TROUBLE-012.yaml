@@ -1,0 +1,39 @@
+id: NG-TROUBLE-012
+title: "Canal ECG não aparece no exame"
+
+problem_summary: >
+  Exame abre normalmente no visualizador, porém o canal de ECG não aparece
+  na montagem exibida. O problema ocorre quando a montagem não está configurada
+  corretamente para a manufatura utilizada.
+
+
+user_symptoms:
+  - "Canal ECG não aparece no exame"
+  - "O exame está sem ECG"
+  - "Não vejo o canal cardíaco"
+  - "Montagem não mostra ECG"
+
+
+origin:
+  - configuracao
+  - variacao_manufatura
+
+layer:
+  - visualizacao
+  - montagem
+
+severity:
+  user_impact: media
+  system_impact: baixa
+
+root_causes:
+  - description: "Montagem não configurada para a manufatura utilizada"
+    confidence: alta
+
+resolution_steps:
+  - "Editar montagem do exame"
+  - "Adicionar canal Ca1 (ECG)"
+  - "Salvar e recarregar o visualizador"
+
+owner_team:
+  - suporte

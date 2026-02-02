@@ -1,0 +1,45 @@
+id: NG-TROUBLE-005
+title: "Exame aparece mas não abre no visualizador (EDF)"
+
+problem_summary: >
+  Exame aparece na lista da plataforma, porém não abre no visualizador ou fica
+  carregando indefinidamente. O problema ocorre quando o arquivo EDF está ausente,
+  corrompido ou com nome incorreto no bucket.
+
+user_symptoms:
+  - "Exame aparece na lista mas não abre"
+  - "Visualizador não carrega o exame"
+  - "Exame fica carregando indefinidamente"
+  - "Erro ao abrir exame no visualizador"
+
+
+
+origin:
+  - processamento
+  - integridade_de_arquivo
+
+layer:
+  - visualizacao
+
+
+severity:
+  user_impact: alta
+
+root_causes:
+  - description: "Arquivo EDF não foi gerado corretamente"
+    confidence: alta
+
+triage_questions:
+  - "O exame carrega até 80%?"
+  - "Existe edf correspondente no bucket?"
+
+resolution_steps:
+  - "Baixar EEG original"
+  - "Renomear EDF com ID correto"
+  - "Reenviar para edf-files"
+
+escalation_criteria:
+  - "EDF correto reenviado e exame não abre"
+
+owner_team:
+  - suporte_tecnico
