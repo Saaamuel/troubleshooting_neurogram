@@ -16,7 +16,7 @@ Toda alteração é validada automaticamente por **schema + taxonomia + CI**.
 
 
 # “caso”
-Um **caso** representa **um problema único e recorrente**, descrito de forma que:
+Um caso representa um problema único e recorrente que temos na neurogram, descrito de forma que:
 - humanos entendam
 - máquinas consigam classificar e recuperar
 
