@@ -12,13 +12,13 @@ Toda alteração é validada automaticamente por **schema + taxonomia + CI**.
 
 ---
 
-## 📂 Estrutura do repositório
+# Estrutura do repositório
 
 
 ---
 
-## 🧠 O que é um “caso”
-Um **caso** representa **um problema único e recorrente**, descrito de forma que:
+# “caso”
+Um caso representa um problema único e recorrente que temos na neurogram, descrito de forma que:
 - humanos entendam
 - máquinas consigam classificar e recuperar
 
@@ -26,7 +26,7 @@ Cada arquivo em `cases/` deve conter **apenas um problema**.
 
 ---
 
-## 🧩 Campos obrigatórios de um caso
+#Campos obrigatórios de um caso
 
 Todo arquivo em `cases/*.yaml` **DEVE** conter:
 
