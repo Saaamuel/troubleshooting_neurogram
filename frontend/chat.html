@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RAG Troubleshooting Chat</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #3f6f46;
+    }
+    .wrap {
+      max-width: 720px;
+      margin: 28px auto;
+      padding: 0 16px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+      overflow: hidden;
+    }
+    .header {
+      padding: 12px 16px;
+      background: #f5f5f5;
+      border-bottom: 1px solid #e6e6e6;
+      font-weight: 700;
+    }
+    .messages {
+      height: 520px;
+      overflow: auto;
+      padding: 14px 16px;
+      background: #fff;
+    }
+    .msg {
+      margin: 10px 0;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #f2f2f2;
+    }
+    .msg.you {
+      background: #e9eefc;
+    }
+    .label {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #3a3a3a;
+    }
+    .case {
+      border: 1px solid #e6e6e6;
+      border-radius: 10px;
+      padding: 12px;
+      background: #fafafa;
+    }
+    .case .title {
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .case .meta {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .case h4 {
+      margin: 10px 0 6px 0;
+      font-size: 13px;
+    }
+    .case ul {
+      margin: 6px 0 0 18px;
+      padding: 0;
+    }
+    .inputbar {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid #e6e6e6;
+      background: #fff;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px 12px;
+      border: 2px solid #2f2f2f;
+      border-radius: 6px;
+      outline: none;
+    }
+    button {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 6px;
+      background: #1f6b2b;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="header">RAG Troubleshooting Chat</div>
+      <div class="messages" id="messages"></div>
+      <div class="inputbar">
+        <input
+          id="query"
+          type="text"
+          placeholder="Olá, sou o Suporte Neurogram, descreva o problema..."
+          onkeydown="if(event.key==='Enter'){send()}"
+        />
+        <button id="btn" onclick="send()">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = "http://127.0.0.1:8080/ask";
+
+    function escapeHtml(s) {
+      return String(s ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function addMessage(label, html, cls) {
+      const messages = document.getElementById("messages");
+      const div = document.createElement("div");
+      div.className = "msg " + (cls || "");
+      div.innerHTML = `<div class="label">${escapeHtml(label)}</div>${html}`;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function renderCase(m) {
+      const title = `${escapeHtml(m.id)} - ${escapeHtml(m.title)}`;
+      const meta = `impacto: ${escapeHtml(m.severity?.user_impact || "-")} | camada: ${escapeHtml((m.layer || [])[0] || "-")}`;
+
+      const summary = escapeHtml(m.problem_summary || "-");
+
+      const steps = (m.recommended_next?.resolution_steps || []).map(x => `<li>${escapeHtml(x)}</li>`).join("");
+      const triage = (m.recommended_next?.triage_questions || []).map(x => `<li>${escapeHtml(x)}</li>`).join("");
+      const evidence = (m.recommended_next?.evidence_to_collect || []).map(x => `<li>${escapeHtml(x)}</li>`).join("");
+
+      return `
+        <div class="case">
+          <div class="title">${title}</div>
+          <div class="meta">${meta}</div>
+
+          <h4>Resumo</h4>
+          <div>${summary}</div>
+
+          ${triage ? `<h4>Perguntas de triagem</h4><ul>${triage}</ul>` : ""}
+          ${evidence ? `<h4>Evidências para coletar</h4><ul>${evidence}</ul>` : ""}
+          ${steps ? `<h4>Passos para resolver</h4><ul>${steps}</ul>` : ""}
+        </div>
+      `;
+    }
+
+    async function send() {
+      const input = document.getElementById("query");
+      const btn = document.getElementById("btn");
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = "";
+      addMessage("Você", `<div>${escapeHtml(text)}</div>`, "you");
+
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: text, top_k: 1 })
+        });
+
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status);
+        }
+
+        const data = await res.json();
+        const m = (data.matches || [])[0];
+
+        if (!m) {
+          addMessage("RAG", `<div>Nenhum caso encontrado.</div>`, "");
+        } else {
+          addMessage("RAG", renderCase(m), "");
+        }
+      } catch (e) {
+        addMessage("Erro", `<div>Falha ao chamar o backend.</div>`, "");
+        console.error(e);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    addMessage("RAG", "<div>Oi! Descreva o problema e eu vou buscar o caso mais relevante.</div>", "");
+  </script>
+</body>
+</html>

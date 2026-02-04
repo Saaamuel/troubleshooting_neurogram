@@ -1,2 +1,8 @@
 pyyaml
 jsonschema
+numpy
+fastapi
+uvicorn
+sentence-transformers
+pyyaml
+
