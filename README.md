@@ -2,27 +2,20 @@
 
 Este repositório contém a **base estruturada de troubleshooting da Neurogram**.
 
-O objetivo não é documentação tradicional, mas sim uma **base de conhecimento validada**, pronta para:
+O objetivo é uma **base de conhecimento**, pronta para:
 - suporte interno
 - auxílio a usuários
 - automação (RAG / LLM / SLM)
 - governança de conhecimento operacional
 
-Toda alteração é validada automaticamente por **schema + taxonomia + CI**.
-
-feat-semantic-lint
-
-
-Estrutura do repositório
+Toda alteração é validada automaticamente por **schema + taxonomia + CI**. ou "validators"
 
 
 
+# Estrutura do repositório
 
 
 
-Estrutura do repositório
-
- main
 
 # “caso”
 Um caso representa um problema único e recorrente que temos na neurogram, descrito de forma que:
@@ -30,16 +23,11 @@ Um caso representa um problema único e recorrente que temos na neurogram, descr
 - máquinas consigam classificar e recuperar
 
 Cada arquivo em `cases/` deve conter **apenas um problema**.
+Cada arquivo `cases/` deve ser bem descrito (ainda esta em desenvolvimento e afinamento de detalhes)
 
- feat-semantic-lint
----
+
 
 #Campos obrigatórios de um caso
-
------------------------------------------------------------------------------
-
-Campos obrigatórios de um caso
-main
 
 Todo arquivo em `cases/*.yaml` **DEVE** conter:
 
@@ -98,3 +86,5 @@ evidence_to_collect:
 
 do_not_do:
   - "Não apagar arquivos do bucket"
+
+#OBS: é uma boa prática que os arquivos `cases/*.yaml` sejam bem detalhados. (Está ainda em processo de desenvolvimento e testes)
