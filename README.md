@@ -10,12 +10,19 @@ O objetivo não é documentação tradicional, mas sim uma **base de conheciment
 
 Toda alteração é validada automaticamente por **schema + taxonomia + CI**.
 
----
-
-# Estrutura do repositório
+feat-semantic-lint
 
 
----
+Estrutura do repositório
+
+
+
+
+
+
+Estrutura do repositório
+
+ main
 
 # “caso”
 Um caso representa um problema único e recorrente que temos na neurogram, descrito de forma que:
@@ -24,9 +31,15 @@ Um caso representa um problema único e recorrente que temos na neurogram, descr
 
 Cada arquivo em `cases/` deve conter **apenas um problema**.
 
+ feat-semantic-lint
 ---
 
 #Campos obrigatórios de um caso
+
+-----------------------------------------------------------------------------
+
+Campos obrigatórios de um caso
+main
 
 Todo arquivo em `cases/*.yaml` **DEVE** conter:
 
